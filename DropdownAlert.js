@@ -167,27 +167,29 @@ export default class DropdownAlert extends Component {
           break;
       }
       return (
-        <Modal animationType='fade' transparent={true} visible={this.state.visible} onRequestClose={this.dismiss}>
-          <Animated.View style={{
-              transform: [{
-                translateY: this.state.fadeAnim.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [this.state.startDelta, this.state.endDelta]
-                }),
-              }],
-            }}>
-            {this.renderStatusBar(statusBarBackgroundColor)}
-            <TouchableHighlight onPress={this.dismiss} underlayColor={'lightgray'} onLayout={(event) => this.onLayoutEvent(event)}>
-              <View style={style}>
-                {this.renderImage(source)}
-                <View style={styles.textContainer}>
-                  {this.renderTitle()}
-                  {this.renderMessage()}
-                </View>
+        <Animated.View style={{
+            transform: [{
+              translateY: this.state.fadeAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [this.state.startDelta, this.state.endDelta]
+              }),
+            }],
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: WINDOW.width
+          }}>
+          {this.renderStatusBar(statusBarBackgroundColor)}
+          <TouchableHighlight onPress={this.dismiss} underlayColor={'lightgray'} onLayout={(event) => this.onLayoutEvent(event)}>
+            <View style={style}>
+              {this.renderImage(source)}
+              <View style={styles.textContainer}>
+                {this.renderTitle()}
+                {this.renderMessage()}
               </View>
-            </TouchableHighlight>
-          </Animated.View>
-        </Modal>
+            </View>
+          </TouchableHighlight>
+        </Animated.View>
       )
     } else {
       return (<View />)
